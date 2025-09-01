@@ -69,41 +69,44 @@ def get_subjects():
 
 
 # API to add subject
-@subjects_bp.route("/api/subjects", methods=["POST","GET"])
+@subjects_bp.route("/api/subjects", methods=["POST"])
 def add_subject():
     if "user_id" not in session:
         return jsonify({"error": "Unauthorized"}), 401
 
-    conn = None
-    cursor = None
     try:
         data = request.get_json()
-        subject_name = data.get("name")
-        education_level = data.get("level")
+        subject_name = data.get("name", "").strip()
+        education_level = data.get("level", "General").strip()
         user_id = session["user_id"]
 
         if not subject_name:
             return jsonify({"error": "Subject name required"}), 400
-        
+
         conn = get_connection()
-        cursor = conn.cursor()
+        cursor = conn.cursor(dictionary=True)
 
-        conn.commit()
-
+        # Check if subject already exists
+        cursor.execute(
+            "SELECT id FROM subjects WHERE user_id=%s AND subject_name=%s",
+            (user_id, subject_name)
+        )
         existing = cursor.fetchone()
         if existing:
             return jsonify({"error": "Subject already exists"}), 400
-        conn = get_connection()
-        cursor = conn.cursor()
 
+        # Insert new subject
         cursor.execute(
-            "INSERT INTO subjects (user_id, subject_name, education_level) VALUES (%s,%s,%s)",
-            (user_id, subject_name, education_level),
+            "INSERT INTO subjects (user_id, subject_name, education_level) VALUES (%s, %s, %s)",
+            (user_id, subject_name, education_level)
         )
         conn.commit()
         return jsonify({"message": "Subject added successfully"}), 201
+
     except Exception as e:
+        print("Add subject error:", e)
         return jsonify({"error": str(e)}), 500
+
     finally:
         if cursor:
             cursor.close()
