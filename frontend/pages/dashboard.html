@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjects | AI Study Buddy</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>AI Study Buddy</h2>
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="./generate_study_plan.html">Generate Study Plan</a></li>
+
+          <li><a href="#">Settings</a></li>
+          <li id="logoutBtn">Logout</li>
+        </ul>
+      </nav>
+      <i class=" fa fa-bars"></i>
+    </aside>
+
+    <!-- Main Section -->
+    <section class="main-content">
+      <header>
+        <h1><span id="welcomeUser" class="welcomeUser">Student</span> 👋</h1>
+        <div class="progress">
+          <label>Subjects Progress</label>
+          <progress id="subjectProgress" value="2" max="5"></progress>
+          <span>2 / 5</span>
+        </div>
+      </header>
+
+      <!-- Add Subject Form -->
+      <div class="add-subject">
+        <h2>Add New Subject</h2>
+        <form id="subjectForm">
+          <input type="text" id="subjectName" placeholder="Enter subject" required>
+          <select name="level" id="level">
+            <option value="form_one">Form one</option>
+            <option value="form_two">Form Two</option>
+            <option value="form_three">Form three</option>
+            <option value="form_four">Form Four</option>
+            <option value="first_year">First Year</option>
+            <option value="second_year">Second Year</option>
+            <option value="third_year">Third Year</option>
+            <option value="fouth_year">Fourth Year</option>
+          </select>
+          <button type="submit">Add</button>
+          <div class="message" id="message"></div>
+        </form>
+      </div>
+
+      <!-- Subject List -->
+      <div class="subject-list" id="subject_list">
+       
+      </div>
+
+      <!-- Study Tips -->
+      <div class="study-tips">
+        <h2>📌 Study Tip</h2>
+        <p id="tipText">Consistency beats intensity — study at least 25 minutes daily.</p>
+      </div>
+
+    </section>
+  </div>
+  <script type="module" src="../js/add_subject.js"></script>
+</body>
+</html>

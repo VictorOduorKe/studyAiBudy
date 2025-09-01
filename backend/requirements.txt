@@ -1,0 +1,13 @@
+SECRET_KEY=c3c62xxxxx your secret key
+GEMINI_API_KEY=AIzaxxxxxxx geminy api key
+FLASK_ENV=developmen
+OPENAI_API_KEY=xkvv******* OPENA AI key
+HF_API_KEY =hf_**************** hf key
+
+
+
+DB_HOST=hostname
+DB_USER=databaseuser
+DB_NAME=database name
+DB_PASSWORD=database PASSWORD
+DB_PORT=port number

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjects | AI Study Buddy</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+</head>
+<body>
+  <div class="dashboard">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>AI Study Buddy</h2>
+      <nav>
+        <ul>
+         <li><a href="./dashboard.html">Dashboard</a></li>
+          <li><a href="./generate_study_plan.html">Generate Study Plan</a></li>
+          <li><a href="#">Settings</a></li>
+          <li id="logoutBtn">Logout</li>
+        </ul>
+      </nav>
+      <i class="fa fa-bars"></i>
+    </aside>
+
+    <!-- Main Section -->
+    <section class="main-content">
+      <header>
+        <h1>Hello, <span id="username" class="welcomeUser">Student</span> 👋</h1>
+        <div class="progress" id="subjectProgress">
+          <label>Quiz Score</label>
+          <span></span>
+        </div>
+      </header>
+
+      <!-- Add Subject Form -->
+     <section>
+    <h2>Your Study Plan</h2>
+
+
+<div id="studyPlan"></div>
+
+
+     </section>
+   
+      <!-- Study Tips -->
+      <div class="study-tips">
+        <h2>📌 Study Tip</h2>
+        <p id="tipText">Consistency beats intensity — study at least 25 minutes daily.</p>
+      </div>
+
+    </section>
+  </div>
+
+  <script type="module" src="../js/study_plan.js"></script>
+  <script>
+
+</script>
+</body>
+</html>

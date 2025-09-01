@@ -1,0 +1,21 @@
+
+#subjects-list li a{
+    padding:5px;
+    text-decoration: none;
+    background-color: #222;
+    margin:5px;
+    color: beige;
+    border-radius: 10px;
+}
+#subjects-list li{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    padding:5px;
+}
+#subjects-list li:nth-child(even){
+    background:#fff;
+}
+#subjects-list button{
+    background: green;
+}
