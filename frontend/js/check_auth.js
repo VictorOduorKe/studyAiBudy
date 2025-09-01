@@ -9,6 +9,7 @@ export async function checkAuth() {
     if (res.ok) {
       return true;
     } else {
+      console.log("no response")
       window.location.href = "../index.html";
       return false;
     }
