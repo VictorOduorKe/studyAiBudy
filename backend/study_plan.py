@@ -8,7 +8,6 @@ import json
 import re
 
 # 🔽 Import DB functions
-from config import DB_CONFIG
 from mysql.connector import pooling
 
 # 🔐 Load environment variables
