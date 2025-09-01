@@ -91,7 +91,7 @@ def signup():
         # -------------------------------------
         # 🔐 Step 3: Hash password and save
         # -------------------------------------
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        hashed_password = Bcrypt.generate_password_hash(password).decode('utf-8')
 
         result = execute_query(
             "INSERT INTO users (name, email, password) VALUES (%s, %s, %s)",

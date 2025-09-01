@@ -11,7 +11,7 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 # ✅ STEP 1: Initialize CORS FIRST — before any blueprints
 CORS(app,
-     origins=["http://127.0.0.1:5500"],  # 👈 Your frontend
+     origins=["https://studyaibudy.netlify.app"],  # 👈 Your frontend
      methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
      allow_headers=["Content-Type"],
      supports_credentials=True,

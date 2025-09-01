@@ -20,7 +20,7 @@ app.secret_key = os.getenv("SECRET_KEY")
 # ✅ Enable CORS for your frontend
 CORS(
     app,
-    origins=["http://127.0.0.1:5500"],
+    origins=["https://studyaibudy.netlify.app"],
     supports_credentials=True,
     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type"],
