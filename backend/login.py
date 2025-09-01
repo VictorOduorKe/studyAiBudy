@@ -50,14 +50,14 @@ def login():
 # -----------------------------
 @login_bp.route("/api/user", methods=["GET"])
 def get_current_user():
+    print("Session data:", dict(session))  # Debug: check session content
     if "user_id" not in session:
-       
-        return jsonify({"error": "Unauthorized","redirectiUrl":"../index.html"}), 401
-    
+        return jsonify({"error": "Unauthorized","redirectUrl":"../index.html"}), 401
     return jsonify({
         "id": session["user_id"],
         "username": session["username"]
     }), 200
+
 
 
 
