@@ -37,7 +37,7 @@ addForm.addEventListener("submit", async (e) => {
     }
 
     try {
-        const res = await fetch("http://127.0.0.1:8000/api/subjects", {
+        const res = await fetch("https://studyaibudy.onrender.com/api/subjects", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -82,7 +82,7 @@ function showMessage(text, color) {
 // ✅ Load subjects
 async function loadSubjects() {
     try {
-        const res = await fetch("http://127.0.0.1:8000/subjects", {
+        const res = await fetch("https://studyaibudy.onrender.com/subjects", {
             method: "GET",
             credentials: "include"
         });
@@ -145,7 +145,7 @@ window.deleteSubject = async function(id) {
     if (!confirm("Are you sure you want to delete this subject? This will also delete its study plan.")) return;
 
     try {
-        const res = await fetch(`http://127.0.0.1:8000/api/subjects/${id}`, {
+        const res = await fetch(`https://studyaibudy.onrender.com/api/subjects/${id}`, {
             method: "DELETE",
             credentials: "include"
         });

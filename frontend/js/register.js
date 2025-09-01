@@ -9,7 +9,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
   authMsg.innerText = ""; // Clear previous message
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/signup", {
+    const response = await fetch("https://studyaibudy.onrender.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

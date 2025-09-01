@@ -20,7 +20,7 @@ far_bars.addEventListener("click",()=>{
 // 🔐 Auth check
 async function checkAuth() {
   try {
-    const res = await fetch("http://127.0.0.1:8000/auth/api/user", {
+    const res = await fetch("https://studyaibudy.onrender.com/auth/api/user", {
       method: "GET",
       credentials: "include"
     });
@@ -43,7 +43,7 @@ async function checkAuth() {
 // 🚀 Fetch and display saved study plan
 async function loadSavedStudyPlan(plan_id) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/plan/${plan_id}`, {
+    const response = await fetch(`https://studyaibudy.onrender.com/api/plan/${plan_id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include"
@@ -221,7 +221,7 @@ function showResults() {
   // ✅ Save answers to backend
   async function saveQuizAnswers(plan_id, answers, score, total) {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/quiz/submit", {
+      const response = await fetch("https://studyaibudy.onrender.com/api/quiz/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -254,7 +254,7 @@ checkIfQuizSubmitted(studyPlanId).then(submitted => {
 
 async function checkIfQuizSubmitted(plan_id) {
   try {
-    const res = await fetch(`http://127.0.0.1:8000/api/quiz/result/${plan_id}`, {
+    const res = await fetch(`https://studyaibudy.onrender.com/api/quiz/result/${plan_id}`, {
       credentials: "include"
     });
     return res.ok;
