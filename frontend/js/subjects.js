@@ -20,7 +20,7 @@ far_bars.addEventListener("click",()=>{
 // Load subjects from backend
 async function loadSubjects() {
   try {
-    const res = await fetch("http://127.0.0.1:5000/subjects", {
+    const res = await fetch("http://127.0.0.1:8000/subjects", {
       method: "GET",
       credentials: "include"
     });
@@ -88,7 +88,7 @@ addForm.addEventListener("submit", async (e) => {
   }
 
   try {
-    const res = await fetch("http://127.0.0.1:5000/api/subjects", {
+    const res = await fetch("http://127.0.0.1:8000/api/subjects", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -112,7 +112,7 @@ addForm.addEventListener("submit", async (e) => {
 // Make generateStudyPlan globally available
 window.generateStudyPlan = async function(subjectName, subjectLevel) {
   try {
-    const res = await fetch("http://127.0.0.1:5000/api/generate_plan", {
+    const res = await fetch("http://127.0.0.1:8000/api/generate_plan", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

@@ -17,7 +17,7 @@ far_bars.addEventListener("click",()=>{
 // 🔐 0️⃣ Check Authentication
 async function checkAuth() {
     try {
-        const res = await fetch("http://127.0.0.1:5000/auth/api/user", {
+        const res = await fetch("http://127.0.0.1:8000/auth/api/user", {
             method: "GET",
             credentials: "include"
         });
@@ -39,7 +39,7 @@ async function checkAuth() {
 // 1️⃣ Load subjects
 async function loadSubjects() {
     try {
-        const ap_url = "http://127.0.0.1:5000/subjects";
+        const ap_url = "http://127.0.0.1:8000/subjects";
         const res = await fetch(ap_url, {
             method: "GET",
             credentials: "include"
@@ -101,7 +101,7 @@ async function generateStudyPlan(subjectName, subjectLevel) {
     studyPlanContainer.innerHTML = "<p><em>Generating your study plan...</em></p>";
 
     try {
-        const res = await fetch("http://127.0.0.1:5000/api/generate_plan", {
+        const res = await fetch("http://127.0.0.1:8000/api/generate_plan", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

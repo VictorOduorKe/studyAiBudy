@@ -1,13 +1,12 @@
-SECRET_KEY=c3c62xxxxx your secret key
-GEMINI_API_KEY=AIzaxxxxxxx geminy api key
-FLASK_ENV=developmen
-OPENAI_API_KEY=xkvv******* OPENA AI key
-HF_API_KEY =hf_**************** hf key
-
-
-
-DB_HOST=hostname
-DB_USER=databaseuser
-DB_NAME=database name
-DB_PASSWORD=database PASSWORD
-DB_PORT=port number
+Flask==3.1.2
+flask-cors==6.0.1
+python-dotenv==1.0.1
+mysql-connector-python==9.4.0
+bcrypt==4.2.0
+gunicorn==23.0.0
+requests==2.32.3
+pandas==2.2.3
+numpy==2.1.3
+openai==1.42.0
+google-generativeai==0.7.2
+Flask-Bcrypt==1.0.1

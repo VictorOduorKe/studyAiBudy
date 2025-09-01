@@ -1,7 +1,7 @@
 // js/check_auth.js
 export async function checkAuth() {
   try {
-    const res = await fetch("http://127.0.0.1:5000/auth/api/user", {
+    const res = await fetch("http://127.0.0.1:8000/auth/api/user", {
       method: "GET",
       credentials: "include"
     });
