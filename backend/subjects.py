@@ -88,10 +88,8 @@ def add_subject():
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute(
-            "SELECT id FROM subjects WHERE user_id=%s AND subject_name=%s",
-            (user_id, subject_name)
-        )
+        conn.commit()
+
         existing = cursor.fetchone()
         if existing:
             return jsonify({"error": "Subject already exists"}), 400
