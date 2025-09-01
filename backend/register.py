@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from extensions import bcrypt
+from flask_bcrypt import Bcrypt
 from db import execute_query
 import re
 
