@@ -59,25 +59,39 @@ def generate_plan():
                 "quiz_questions": json.loads(existing_plan["quiz_questions"])
             })
 
-        # AI Prompt
+        # 🔥 Use original full prompt from first script
         prompt = f"""
-        Create a study plan for '{subject}' at '{level}' level.
-        Include: 1. Summary 2. 7-week roadmap 3. 10 MCQs
-        Return ONLY a JSON object.
+        Create a comprehensive study plan for '{subject}' at '{level}' level.
+        Include:
+        1. A short summary.
+        2. A 7-week roadmap: week, topic, goal.
+        3. 10 multiple-choice questions with 4 options and correct answer.
+
+        Return only a valid JSON object:
+        {{
+          "summary": "...",
+          "roadmap": [{{"week": "1", "topic": "...", "goal": "..."}}],
+          "quiz_questions": [{{"question": "...", "options": ["A","B","C","D"], "answer": "A"}}]
+        }}
+        Only raw JSON. No markdown.
         """
 
         payload = {
-            "contents":[{"parts":[{"text": prompt}]}],
-            "generationConfig":{"temperature":0.7,"topP":0.9,"maxOutputTokens":1200},
-            "safetySettings":[
-                {"category":"HARM_CATEGORY_HARASSMENT","threshold":"BLOCK_ONLY_HIGH"},
-                {"category":"HARM_CATEGORY_HATE_SPEECH","threshold":"BLOCK_ONLY_HIGH"},
-                {"category":"HARM_CATEGORY_SEXUALLY_EXPLICIT","threshold":"BLOCK_ONLY_HIGH"},
-                {"category":"HARM_CATEGORY_DANGEROUS_CONTENT","threshold":"BLOCK_ONLY_HIGH"}
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "temperature": 0.7,
+                "topP": 0.9,
+                "maxOutputTokens": 1200
+            },
+            "safetySettings": [
+                {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_ONLY_HIGH"},
+                {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_ONLY_HIGH"},
+                {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_ONLY_HIGH"},
+                {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_ONLY_HIGH"}
             ]
         }
 
-        headers = {"Content-Type":"application/json"}
+        headers = {"Content-Type": "application/json"}
         response = requests.post(GEMINI_API_URL, json=payload, headers=headers, timeout=20)
         if response.status_code != 200:
             return jsonify({"error": "Gemini API failed", "details": response.text}), 502
@@ -110,6 +124,7 @@ def generate_plan():
     except Exception as e:
         print(f"Error generating plan: {e}")
         return jsonify({"error":"Server error","details":str(e)}), 500
+
 
 
 # -----------------------------
