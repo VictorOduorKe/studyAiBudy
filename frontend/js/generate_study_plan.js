@@ -3,56 +3,48 @@ import { logout } from "./logout.js";
 const subjectsList = document.getElementById("subjects-list");
 const studyPlanContainer = document.getElementById("studyPlan");
 const messageArea = document.querySelector(".welcomeUser");
-const far_bars=document.querySelector(".fa-bars")
-const nav=document.querySelector(".sidebar");
+const farBars = document.querySelector(".fa-bars");
+const nav = document.querySelector(".sidebar");
 
-far_bars.addEventListener("click",()=>{
-    far_bars.classList.toggle("fa-close");
-    far_bars.style.color="gray";
-    far_bars.style.top="30px"
-  
+farBars.addEventListener("click", () => {
+    farBars.classList.toggle("fa-close");
+    farBars.style.color = "gray";
+    farBars.style.top = "30px";
+    nav.classList.toggle("display_nav");
+});
 
-    nav.classList.toggle("display_nav")
-})
-// 🔐 0️⃣ Check Authentication
+// 🔐 Check Authentication
 async function checkAuth() {
     try {
         const res = await fetch("https://studyaibudy.onrender.com/auth/api/user", {
             method: "GET",
             credentials: "include"
         });
-
-        if (res.ok) {
-            const userData = await res.json();
-            messageArea.textContent = `Welcome, ${userData.username}!`;
-        } else {
-            const errorData = await res.json();
-            console.warn("Not authenticated:", errorData.error);
-            window.location.href = errorData.redirectUrl || "../index.html";
+        if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            window.location.href = err.redirectUrl || "../index.html";
+            return false;
         }
-    } catch (error) {
-        console.error("Auth check failed:", error);
+        const userData = await res.json();
+        messageArea.textContent = `Welcome, ${userData.username}!`;
+        return true;
+    } catch (err) {
+        console.error("Auth check failed:", err);
         window.location.href = "../index.html";
     }
 }
 
-// 1️⃣ Load subjects
+// 1️⃣ Load Subjects
 async function loadSubjects() {
     try {
-        const ap_url = "https://studyaibudy.onrender.com/subjects";
-        const res = await fetch(ap_url, {
+        const res = await fetch("https://studyaibudy.onrender.com/subjects", {
             method: "GET",
             credentials: "include"
         });
-
         if (!res.ok) {
-            if (res.status === 401) {
-                window.location.href = "../index.html";
-                return;
-            }
-            throw new Error(`HTTP error! status: ${res.status}`);
+            if (res.status === 401) window.location.href = "../index.html";
+            throw new Error(`HTTP ${res.status}`);
         }
-
         const data = await res.json();
         const subjects = data.subjects || [];
         const username = data.username || "User";
@@ -79,24 +71,20 @@ async function loadSubjects() {
                 : '';
 
             li.innerHTML = `
-                <span>
-                    <strong>${sub.subject_name}</strong> 
-                    (${sub.education_level || 'General'})
-                </span>
+                <span><strong>${sub.subject_name}</strong> (${sub.education_level || 'General'})</span>
                 ${button}
                 ${viewPlanLink}
             `;
-
             subjectsList.appendChild(li);
         });
 
-    } catch (error) {
-        console.error("Error loading subjects:", error);
+    } catch (err) {
+        console.error("Failed to load subjects:", err);
         subjectsList.innerHTML = "<li>Failed to load subjects</li>";
     }
 }
 
-// 2️⃣ Generate study plan
+// 2️⃣ Generate Study Plan
 async function generateStudyPlan(subjectName, subjectLevel) {
     studyPlanContainer.innerHTML = "<p><em>Generating your study plan...</em></p>";
 
@@ -109,54 +97,51 @@ async function generateStudyPlan(subjectName, subjectLevel) {
         });
 
         if (!res.ok) {
-            const errorData = await res.json().catch(() => ({}));
-            console.log(errorData);
-            studyPlanContainer.innerHTML = `<p style="color:red;">❌ ${errorData.error || "Failed to generate plan"}</p>`;
+            const err = await res.json().catch(() => ({}));
+            const msg = err.error || err.details || "Failed to generate plan";
+            studyPlanContainer.innerHTML = `<p style="color:red;">❌ ${msg}</p>`;
             return;
         }
 
         const plan = await res.json();
         displayStudyPlan(plan);
 
-        // Refresh subject list to show "View Study Plan" link
+        // Refresh subjects to show "View Plan" link
         await loadSubjects();
 
-    } catch (error) {
-        console.error("Error generating study plan:", error);
-        studyPlanContainer.innerHTML = "<p style='color:red; padding:10px'>❌ Failed to connect to AI backend.</p>";
+    } catch (err) {
+        console.error("Error generating plan:", err);
+        studyPlanContainer.innerHTML = "<p style='color:red;'>❌ Failed to connect to AI backend.</p>";
     }
 }
 
-// 3️⃣ Display the study plan
+// 3️⃣ Display Study Plan
 function displayStudyPlan(plan) {
     if (!plan || !plan.id) {
-        studyPlanContainer.innerHTML = `<p style="color:green; padding:10px;" >Study plan Generated successfully</a>`;
+        studyPlanContainer.innerHTML = `<p>Study plan generated successfully!</p>`;
         return;
     }
 
     studyPlanContainer.innerHTML = `
-        <div style="padding: 15px; border: 1px solid #d0ebff; background-color: #f0f8ff; border-radius: 8px;">
+        <div style="padding:15px; border:1px solid #d0ebff; background-color:#f0f8ff; border-radius:8px;">
             <h3>✅ Study Plan Generated!</h3>
             <p><strong>Subject:</strong> ${plan.subject}</p>
             <p><strong>Level:</strong> ${plan.level}</p>
             <p><strong>Plan ID:</strong> ${plan.id}</p>
             <a href="./study_plan.html?plan_id=${plan.id}" 
-               style="color:#fff; background-color:#3498db; padding:8px 12px; border-radius:4px; text-decoration:none; display:inline-block; margin-top:10px;">
+               style="color:#fff; background-color:#3498db; padding:8px 12px; border-radius:4px; text-decoration:none; margin-top:10px; display:inline-block;">
                Open Study Plan
             </a>
         </div>
     `;
 }
 
-// ✅ Make generateStudyPlan globally available
 window.generateStudyPlan = generateStudyPlan;
 
-// 🔁 On Page Load
-checkAuth().then(() => loadSubjects());
+// 🔁 Initialize
+checkAuth().then(auth => auth && loadSubjects());
 
-// ✅ Logout button
+// Logout
 document.getElementById("logoutBtn")?.addEventListener("click", async () => {
-    if (confirm("Are you sure you want to log out?")) {
-        await logout();
-    }
+    if (confirm("Are you sure you want to log out?")) await logout();
 });
