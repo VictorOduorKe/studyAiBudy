@@ -7,7 +7,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 # ✅ STEP 1: Initialize CORS FIRST — before any blueprints
 CORS(app,
