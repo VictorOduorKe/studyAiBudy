@@ -28,7 +28,7 @@ CORS(
 
 # 🔁 Connection pool
 connection_pool = pooling.MySQLConnectionPool(
-    pool_name="studyplan_pool", pool_size=5, pool_reset_session=True, **DB_CONFIG
+    pool_name="studyplan_pool", pool_size=5, pool_reset_session=True
 )
 
 
