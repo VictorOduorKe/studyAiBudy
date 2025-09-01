@@ -2,6 +2,8 @@ from flask import Flask, jsonify, session
 from flask_cors import CORS  # ✅ Import directly
 from dotenv import load_dotenv
 import os
+from flask_bcrypt import Bcrypt
+
 from register import register_bp
 from login import login_bp
 from subjects import subjects_bp
@@ -14,6 +16,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
+bcrypt = Bcrypt(app)
 
 app.config["SESSION_COOKIE_HTTPONLY"] = True
 app.config["SESSION_COOKIE_SECURE"] = True        # HTTPS only

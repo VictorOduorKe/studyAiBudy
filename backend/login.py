@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify, session
 from db import get_connection
-import bcrypt
+from flask_bcrypt import Bcrypt
 
 login_bp = Blueprint("login", __name__)
+bcrypt = Bcrypt()  # ✅ Create instance here
 
 # -----------------------------
 # Login route
@@ -19,23 +20,22 @@ def login():
 
     conn = get_connection()
     if not conn:
-        return jsonify({"error":"Connection error try again later"})
+        return jsonify({"error":"Connection error. Try again later"}), 500
+
     cursor = conn.cursor(dictionary=True)
-      
     cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
     user = cursor.fetchone()
-
     cursor.close()
     conn.close()
 
     if not user:
         return jsonify({"error": "Invalid email or password"}), 401
 
-    # validate password
-    if bcrypt.checkpw(password.encode("utf-8"), user["password"].encode("utf-8")):
-        # ✅ store session
+    # ✅ validate password using Flask-Bcrypt
+    if bcrypt.check_password_hash(user["password"], password):
+        # store session
         session["user_id"] = user["id"]
-        session["username"] = user["name"]  # keep key consistent
+        session["username"] = user["name"]
 
         return jsonify({
             "message": "Login successful",
@@ -50,15 +50,13 @@ def login():
 # -----------------------------
 @login_bp.route("/api/user", methods=["GET"])
 def get_current_user():
-    print("Session data:", dict(session))  # Debug: check session content
     if "user_id" not in session:
-        return jsonify({"error": "Unauthorized","redirectUrl":"../index.html"}), 401
+        return jsonify({"error": "Unauthorized", "redirectUrl":"../index.html"}), 401
+
     return jsonify({
         "id": session["user_id"],
         "username": session["username"]
     }), 200
-
-
 
 
 # -----------------------------
@@ -68,5 +66,3 @@ def get_current_user():
 def logout():
     session.clear()
     return jsonify({"message": "Logged out successfully"}), 200
-
-
