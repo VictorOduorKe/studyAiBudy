@@ -196,3 +196,28 @@
   }
 
  }
+ #loginBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+#loginBtn span {
+  animation: animateBtn 2s ease-in-out infinite alternate;
+  background: green;
+  padding:10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+@keyframes animateBtn {
+  0% {
+    transform: scale(0.4);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.4);
+  }
+}
