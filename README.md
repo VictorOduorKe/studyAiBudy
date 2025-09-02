@@ -1,8 +1,7 @@
 📚 Study AI Buddy – Your Personalized Study Plan Generator
 
 Welcome to Study AI Buddy, a smart platform that helps students generate tailored study plans, take quizzes, and track learning progress—all powered by AI and a secure backend. This document explains the full development process, including frontend, backend, database, and integration with AI APIs.
-
-🌟 Project Overview
+[Visit my pitch deck](https://www.canva.com/design/DAGxwlZ1pHg/W4Sh_-5CifIe0os3JjfEIA/edit?utm_content=DAGxwlZ1pHg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton "pitch dck")
 
 Study AI Buddy allows users to:
 
