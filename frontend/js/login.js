@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await res.json();
       const span=document.createElement("span");
-      loginBtn.appendChild(span);
+      loginBtn.innerHTML=span;
       loginBtn.disasbled=true;
-      loginBtn.style.color="gray"
+      loginBtn.style.background="gray"
       if (res.ok) {
         msgDiv.style.color = "green";
         msgDiv.textContent = "Login successful! Redirecting...";
