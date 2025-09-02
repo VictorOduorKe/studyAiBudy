@@ -116,3 +116,35 @@ button:hover { background: #1a5ed1; }
     transform: rotate(360deg);
   }
 }
+
+#signInBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #28a745; /* green button */
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#signInBtn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+#signInBtn .loader {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 10px;
+}
+
