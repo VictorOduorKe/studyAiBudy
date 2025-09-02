@@ -5,16 +5,16 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
   const authMsg = document.getElementById("authMsg");
-  const signInBtn = document.getElementById("signInBtn");
+  const signUpBtn = document.getElementById("signUpBtn");
 
   authMsg.innerText = ""; // Clear previous message
 
   // disable button & show loader
-  signInBtn.disabled = true;
-  signInBtn.style.background = "gray";
+  signUpBtn.disabled = true;
+  signUpBtn.style.background = "gray";
   const loader = document.createElement("span");
   loader.classList.add("loader");
-  signInBtn.appendChild(loader);
+  signUpBtn.appendChild(loader);
 
   try {
     const response = await fetch("https://studyaibudy.onrender.com/signup", {
@@ -49,8 +49,8 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
     authMsg.innerText = "Server error. Please try again later.";
   } finally {
     // remove loader & re-enable button
-    signInBtn.disabled = false;
-    signInBtn.style.background = "";
+    signUpBtn.disabled = false;
+    signUpBtn.style.background = "";
     loader.remove();
   }
 });
