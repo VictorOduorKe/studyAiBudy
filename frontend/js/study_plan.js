@@ -131,10 +131,7 @@ function displayStudyPlan(plan) {
             const letter = String.fromCharCode(65 + i); // 65 = 'A'
             return `
             <li>
-                <label>
                     <input type="radio" name="quiz-question-${currentQIndex}" value="${letter}" required>
-                    ${letter}. ${opt}
-                </label>
             </li>
         `;
         }).join('')}
