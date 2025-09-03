@@ -126,7 +126,7 @@ function displayStudyPlan(plan) {
             <div style="background:#f9f9f9; padding:15px; border-radius:8px; border:1px solid #ddd;">
                 <p><strong>Question ${currentQIndex + 1} of ${questions.length}:</strong></p>
                 <p style="font-size:1.1em; margin:10px 0;">${q.question}</p>
-               <ol style="margin-left:20px;" type="A">
+               <ul style="margin-left:20px;">
     ${q.options.map((opt, i) => {
             const letter = String.fromCharCode(65 + i); // 65 = 'A'
             return `
@@ -138,7 +138,7 @@ function displayStudyPlan(plan) {
             </li>
         `;
         }).join('')}
-</ol>
+</ul>
 
                 <button onclick="checkAnswer(${currentQIndex})" style="background:#27ae60; color:white; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; margin-top:10px;">
                     Submit Answer
