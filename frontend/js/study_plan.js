@@ -126,16 +126,20 @@ function displayStudyPlan(plan) {
             <div style="background:#f9f9f9; padding:15px; border-radius:8px; border:1px solid #ddd;">
                 <p><strong>Question ${currentQIndex + 1} of ${questions.length}:</strong></p>
                 <p style="font-size:1.1em; margin:10px 0;">${q.question}</p>
-                <ol style="margin-left:20px;" type="a">
-                    ${q.options.map(opt => `
-                        <li>
-                            <label>
-                                <input type="radio" name="quiz-question-${currentQIndex}" value="${opt}" required>
-                                ${opt}
-                            </label>
-                        </li>
-                    `).join('')}
-                </ol>
+               <ol style="margin-left:20px;" type="A">
+    ${q.options.map((opt, i) => {
+            const letter = String.fromCharCode(65 + i); // 65 = 'A'
+            return `
+            <li>
+                <label>
+                    <input type="radio" name="quiz-question-${currentQIndex}" value="${letter}" required>
+                    ${letter}. ${opt}
+                </label>
+            </li>
+        `;
+        }).join('')}
+</ol>
+
                 <button onclick="checkAnswer(${currentQIndex})" style="background:#27ae60; color:white; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; margin-top:10px;">
                     Submit Answer
                 </button>
@@ -147,15 +151,15 @@ function displayStudyPlan(plan) {
     // -------------------------
     // Check Answer
     // -------------------------
-    window.checkAnswer = function(qIndex) {
+    window.checkAnswer = function (qIndex) {
         const selected = document.querySelector(`input[name="quiz-question-${qIndex}"]:checked`);
         if (!selected) {
             alert("Please select an answer!");
             return;
         }
-
-        const givenLetter = selected.value.trim().charAt(0).toUpperCase();
+        const givenLetter = selected.value; // Already 'A', 'B', 'C', ...
         const correctLetter = questions[qIndex].answer.trim().toUpperCase();
+
 
         userAnswers.push({ question: qIndex, given: givenLetter, correct: correctLetter });
 
@@ -186,14 +190,14 @@ function displayStudyPlan(plan) {
                     <p>You scored: <strong>${correctCount} / ${total}</strong></p>
                     <ol type="A">
                         ${userAnswers.map((a, i) => {
-                            const isCorrect = a.given === a.correct;
-                            return `
+                    const isCorrect = a.given === a.correct;
+                    return `
                                 <li>
-                                    Q${i+1}: ${isCorrect ? "✅ Correct" : "❌ Incorrect"}
+                                    Q${i + 1}: ${isCorrect ? "✅ Correct" : "❌ Incorrect"}
                                     ${!isCorrect ? `(You: <strong>${a.given}</strong>, Correct: <em>${a.correct}</em>)` : ""}
                                 </li>
                             `;
-                        }).join('')}
+                }).join('')}
                     </ol>
                     <p id="show_message" style="color: orange; margin-top: 10px;">${message || ''}</p>
                 `;
