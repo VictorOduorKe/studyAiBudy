@@ -126,11 +126,11 @@ function displayStudyPlan(plan) {
             <div style="background:#f9f9f9; padding:15px; border-radius:8px; border:1px solid #ddd;">
                 <p><strong>Question ${currentQIndex + 1} of ${questions.length}:</strong></p>
                 <p style="font-size:1.1em; margin:10px 0;">${q.question}</p>
-               <ul style="margin-left:20px;">
+               <ul style="margin-left:20px; list-style:none;">
     ${q.options.map((opt, i) => {
             const letter = String.fromCharCode(65 + i); // 65 = 'A'
             return `
-            <li>
+            <li style="transition: 0.3s ease-in-out">
                 <label>
                     <input type="radio" name="quiz-question-${currentQIndex}" value="${letter}" required>
                      ${opt}
