@@ -96,7 +96,7 @@ function displayStudyPlan(plan) {
                         <strong>${w.topic}</strong> → 
                         <em>${w.goal}</em>
                         <strong>Short Note</strong>
-                        <em>${w.topicShortNotes||"Not Available kinly regerate"}</em>
+                        <em>${w.topicShortNotes||"Not Available kindly regerate"}</em>
                     </li>
                 `).join('')}
             </ul>
