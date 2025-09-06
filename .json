@@ -286,3 +286,86 @@
         "topicSummary": "Jesus' crucifixion, death, resurrection, and ascension, and their significance for Christians."
     }
 ]
+
+[
+    {
+        "goal": "Accurately interpret map scales and identify distortions in various map projections.",
+        "week": "1",
+        "topic": "Map Projections and Scales",
+        "topicSummary": "Understanding different map projections (Mercator, conical, etc.) and their distortions, as well as calculating and interpreting map scales."
+    },
+    {
+        "goal": "Differentiate between weather and climate and explain the factors influencing climate variations.",
+        "week": "2",
+        "topic": "Weather and Climate",
+        "topicSummary": "Exploring weather elements (temperature, precipitation, wind), climate types (Köppen classification), and their influence on human activities."
+    },
+    {
+        "goal": "Analyze the evidence for climate change and evaluate its potential impacts on different regions.",
+        "week": "3",
+        "topic": "Climate Change and its Impacts",
+        "topicSummary": "Investigating the causes and consequences of climate change, including global warming, sea-level rise, and extreme weather events."
+    },
+    {
+        "goal": "Interpret population pyramids and analyze factors influencing population distribution and change.",
+        "week": "4",
+        "topic": "Population Geography",
+        "topicSummary": "Studying population distribution, density, growth rates, and migration patterns, including demographic transition models."
+    },
+    {
+        "goal": "Explain the factors influencing settlement patterns and the challenges of urbanization.",
+        "week": "5",
+        "topic": "Settlement Geography",
+        "topicSummary": "Examining the patterns and types of settlements (rural, urban), their functions, and the processes of urbanization."
+    },
+    {
+        "goal": "Analyze the spatial distribution of economic activities and their impact on the environment.",
+        "week": "6",
+        "topic": "Economic Geography",
+        "topicSummary": "Exploring different economic activities (primary, secondary, tertiary), their distribution, and their relationship to geographical factors."
+    },
+    {
+        "goal": "Evaluate different approaches to resource management and propose solutions to environmental problems.",
+        "week": "7",
+        "topic": "Resource Management and Environmental Issues",
+        "topicSummary": "Investigating the sustainable management of natural resources (water, minerals, forests) and addressing environmental problems like pollution and deforestation."
+    }
+]
+
+[
+    {
+        "goal": "Understand different types of maps and be able to interpret basic map information.",
+        "week": "1",
+        "topicShortNotes": "Map Skills: Introduction to maps, map scales, cardinal and ordinal directions, map symbols, basic map interpretation."
+    },
+    {
+        "goal": "Differentiate between weather and climate and interpret climate graphs.",
+        "week": "2",
+        "topicShortNotes": "Weather and Climate: Elements of weather (temperature, rainfall, wind, sunshine), weather instruments, climate graphs, factors affecting climate."
+    },
+    {
+        "goal": "Identify and describe the characteristics of different climate zones.",
+        "week": "3",
+        "topicShortNotes": "Climate Zones:  Major world climate zones (tropical, temperate, polar), characteristics of each zone, distribution on a world map."
+    },
+    {
+        "goal": "Explain factors influencing population distribution and interpret population pyramids.",
+        "week": "4",
+        "topicShortNotes": "Population Distribution: Factors affecting population distribution (climate, resources, relief), population density, population pyramids."
+    },
+    {
+        "goal": "Identify and describe different landforms and their processes of formation.",
+        "week": "5",
+        "topicShortNotes": "Landforms:  Introduction to different landforms (mountains, hills, plateaus, plains, valleys, rivers, etc.), processes of formation."
+    },
+    {
+        "goal": "Understand river systems and the processes of erosion and deposition.",
+        "week": "6",
+        "topicShortNotes": "Rivers and Drainage: River systems, river features (source, mouth, tributaries), drainage basins, erosion and deposition by rivers."
+    },
+    {
+        "goal": "Consolidate learning and prepare for assessments.",
+        "week": "7",
+        "topicShortNotes": "Revision and Practice: Review all topics covered, practice map work, answer past papers and sample questions."
+    }
+]
