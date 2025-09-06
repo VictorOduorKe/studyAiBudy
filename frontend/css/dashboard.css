@@ -298,14 +298,16 @@ button.delete {
   align-items: center;
   justify-content: space-between;
  }
- .subject input{
+ .subjectForm input{
   padding: 10px;
+  width: 50%;
  }
  .subjectForm button{
   background: #2d3436;
   color: #ddd;
   font-size: 20px;
   transition: all 0.4s ease-in-out;
+  width: 30%;
 }
 .subjectForm button:hover{
   background: #181717;
