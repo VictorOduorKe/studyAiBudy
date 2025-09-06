@@ -138,9 +138,8 @@ function displayStudyPlan(plan) {
             </li>
         `;
         }).join('')}
-</ul>
-
-                <button onclick="checkAnswer(${currentQIndex})" style="background:#27ae60; color:white; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; margin-top:10px;">
+        </ul>
+         <button onclick="checkAnswer(${currentQIndex})" style="background:#27ae60; color:white; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; margin-top:10px;">
                     Submit Answer
                 </button>
             </div>
