@@ -1,372 +1,197 @@
 [
     {
-        "answer": "604",
-        "options": [
-            "604",
-            "504",
-            "594",
-            "614"
-        ],
-        "question": "What is the value of 356 + 248?"
+        "goal": "Solve 80% of linear and quadratic equations correctly in a practice test.",
+        "week": 1,
+        "topic": "Algebra",
+        "topicShortNotes": [
+            "Solving linear equations and inequalities",
+            "Simplifying algebraic expressions",
+            "Factorization of quadratic expressions",
+            "Simultaneous equations"
+        ]
     },
     {
-        "answer": "5/6",
-        "options": [
-            "1/2",
-            "5/6",
-            "3/9",
-            "1/3"
-        ],
-        "question": "What is 2/3 + 1/6?"
+        "goal": "Accurately apply geometric theorems to solve 10 problems correctly.",
+        "week": 2,
+        "topic": "Geometry",
+        "topicShortNotes": [
+            "Properties of triangles, quadrilaterals, and circles",
+            "Pythagorean theorem and trigonometric ratios",
+            "Mensuration (area and volume)",
+            "Geometric constructions"
+        ]
     },
     {
-        "answer": "1.75",
-        "options": [
-            "2.25",
-            "1.75",
-            "1.25",
-            "2.75"
-        ],
-        "question": "What is 4.5 - 2.75?"
+        "goal": "Solve 5 out of 7 trigonometric problems accurately within 30 minutes.",
+        "week": 3,
+        "topic": "Trigonometry",
+        "topicShortNotes": [
+            "Trigonometric ratios (sine, cosine, tangent)",
+            "Trigonometric identities",
+            "Solving trigonometric equations",
+            "Applications of trigonometry"
+        ]
     },
     {
-        "answer": "Equilateral Triangle",
-        "options": [
-            "Scalene Triangle",
-            "Isosceles Triangle",
-            "Equilateral Triangle",
-            "Right Triangle"
-        ],
-        "question": "A triangle with three equal sides is called a(n):"
+        "goal": "Differentiate and integrate 5 functions correctly.",
+        "week": 4,
+        "topic": "Calculus (Introduction)",
+        "topicShortNotes": [
+            "Concept of limits and derivatives",
+            "Differentiation of simple functions",
+            "Application of derivatives (rates of change)",
+            "Basic integration"
+        ]
     },
     {
-        "answer": "40cm²",
-        "options": [
-            "13cm²",
-            "26cm²",
-            "40cm²",
-            "16cm²"
-        ],
-        "question": "What is the area of a rectangle with length 8cm and width 5cm?"
+        "goal": "Calculate mean, median, mode, and range for a given data set correctly.",
+        "week": 5,
+        "topic": "Statistics",
+        "topicShortNotes": [
+            "Measures of central tendency (mean, median, mode)",
+            "Measures of dispersion (range, variance, standard deviation)",
+            "Probability",
+            "Data representation (graphs and charts)"
+        ]
     },
     {
-        "answer": "6",
-        "options": [
-            "6",
-            "8",
-            "10",
-            "4"
-        ],
-        "question": "What is the mean of 2, 4, 6, 8, 10?"
+        "goal": "Accurately solve vector addition and subtraction problems.",
+        "week": 6,
+        "topic": "Vectors",
+        "topicShortNotes": [
+            "Vector representation and operations (addition, subtraction)",
+            "Scalar and vector products",
+            "Applications of vectors in geometry",
+            "Resolution of vectors"
+        ]
     },
     {
-        "answer": "84",
-        "options": [
-            "74",
-            "84",
-            "94",
-            "64"
-        ],
-        "question": "What is 12 x 7?"
-    },
-    {
-        "answer": "9",
-        "options": [
-            "8",
-            "9",
-            "10",
-            "7"
-        ],
-        "question": "What is 45 ÷ 5?"
-    },
-    {
-        "answer": "3/4",
-        "options": [
-            "1/4",
-            "3/4",
-            "1/2",
-            "2/3"
-        ],
-        "question": "0.75 is equivalent to which fraction?"
-    },
-    {
-        "answer": "16cm",
-        "options": [
-            "8cm",
-            "12cm",
-            "16cm",
-            "4cm"
-        ],
-        "question": "What is the perimeter of a square with sides of 4cm?"
-    }
-]
-
-
-[
-    {
-        "answer": "C",
-        "options": [
-            "Run",
-            "Quickly",
-            "Table",
-            "Beautiful"
-        ],
-        "question": "Which of the following is a noun?"
-    },
-    {
-        "answer": "C",
-        "options": [
-            "Go",
-            "Going",
-            "Went",
-            "Gone"
-        ],
-        "question": "What is the correct past tense of 'go'?"
-    },
-    {
-        "answer": "B",
-        "options": [
-            "Sing",
-            "Happy",
-            "Slowly",
-            "Jump"
-        ],
-        "question": "Which word is an adjective?"
-    },
-    {
-        "answer": "C",
-        "options": [
-            "Sat",
-            "Mat",
-            "Cat",
-            "On"
-        ],
-        "question": "What is the subject in the sentence 'The cat sat on the mat'?"
-    },
-    {
-        "answer": "D",
-        "options": [
-            "Goodbye",
-            "Hello",
-            "See you later",
-            "All of the above"
-        ],
-        "question": "Which is a correct greeting?"
-    },
-    {
-        "answer": "C",
-        "options": [
-            "Childs",
-            "Childen",
-            "Children",
-            "Childs'"
-        ],
-        "question": "What is the correct plural of 'child'?"
-    },
-    {
-        "answer": "C",
-        "options": [
-            "Past",
-            "Future",
-            "Present",
-            "Perfect"
-        ],
-        "question": "'He is walking' is an example of which tense?"
-    },
-    {
-        "answer": "B",
-        "options": [
-            "Loud",
-            "Loudly",
-            "Loudness",
-            "Loudest"
-        ],
-        "question": "Which word is an adverb?"
-    },
-    {
-        "answer": "D",
-        "options": [
-            "Noun",
-            "Verb",
-            "Adjective",
-            "Adverb"
-        ],
-        "question": "What type of word is 'quickly'?"
-    },
-    {
-        "answer": "A",
-        "options": [
-            "Small",
-            "Large",
-            "Huge",
-            "Giant"
-        ],
-        "question": "What is the opposite of 'big'?"
+        "goal": "Score 80% or higher on a full-length practice exam.",
+        "week": 7,
+        "topic": "Revision and Practice Exams",
+        "topicShortNotes": [
+            "Review all topics covered",
+            "Practice past papers",
+            "Identify weak areas and focus on improvement",
+            "Time management during exam practice"
+        ]
     }
 ]
 
 [
     {
-        "goal": "Understand the concept of rhythm, beat, and pulse. Identify different rhythmic patterns.",
+        "goal": "Master basic grammar rules and identify sentence types.",
         "week": "1",
-        "topic": "Introduction to Music: Rhythm and Pulse"
+        "topic": "Grammar Fundamentals (Parts of Speech, Sentence Structure)"
     },
     {
-        "goal": "Understand the concept of melody and pitch. Learn to identify high and low notes. Sing simple melodies.",
+        "goal": "Learn to write effective introductions and develop strong thesis statements.",
         "week": "2",
-        "topic": "Melody and Pitch"
+        "topic": "Essay Writing: Introduction & Thesis Statements"
     },
     {
-        "goal": "Learn to read and write basic musical notation. Identify treble and bass clef. Understand the position of notes on the staff.",
+        "goal": "Develop skill in constructing well-supported body paragraphs using evidence.",
         "week": "3",
-        "topic": "Musical Notation: Staff, Clef, and Notes"
+        "topic": "Essay Writing: Body Paragraphs & Evidence"
     },
     {
-        "goal": "Understand different time signatures (e.g., 4/4, 3/4). Identify different rhythmic values (e.g., whole, half, quarter notes).",
+        "goal": "Master writing effective conclusions and editing techniques.",
         "week": "4",
-        "topic": "Time Signatures and Rhythmic Values"
+        "topic": "Essay Writing: Conclusion & Editing"
     },
     {
-        "goal": "Understand the concepts of dynamics (loudness and softness) and tempo (speed). Identify different dynamic markings (e.g., piano, forte) and tempo markings (e.g., allegro, adagio).",
+        "goal": "Learn to identify and analyze themes and motifs in literary texts.",
         "week": "5",
-        "topic": "Dynamics and Tempo"
+        "topic": "Literary Analysis: Identifying Themes & Motifs"
     },
     {
-        "goal": "Understand basic harmony. Differentiate between consonance and dissonance. Sing simple two-part harmonies.",
+        "goal": "Analyze character development and the impact of setting on literary works.",
         "week": "6",
-        "topic": "Introduction to Harmony: Consonance and Dissonance"
+        "topic": "Literary Analysis: Character Development & Setting"
     },
     {
-        "goal": "Identify different types of musical instruments (e.g., strings, woodwinds, brass, percussion). Learn about different musical genres (e.g., classical, pop, jazz).",
+        "goal": "Consolidate learning through practice essay writing and review of key concepts.",
         "week": "7",
-        "topic": "Musical Instruments and Genres"
-    }
-]
-[
-    {
-        "goal": "Students will be able to identify the main sections of the Bible and explain the importance of studying it.",
-        "week": "1",
-        "topic": "Introduction to CRE and the Bible",
-        "topicSummary": "Understanding what CRE is, the different parts of the Bible (Old and New Testaments), and its importance."
-    },
-    {
-        "goal": "Students will be able to recount the creation story and explain the concept of sin.",
-        "week": "2",
-        "topic": "Creation and the Fall",
-        "topicSummary": "The story of creation as told in Genesis, the nature of God, and the consequences of Adam and Eve's disobedience."
-    },
-    {
-        "goal": "Students will be able to describe the key events in the lives of the patriarchs and their relationship with God.",
-        "week": "3",
-        "topic": "The Patriarchs (Abraham, Isaac, Jacob)",
-        "topicSummary": "The lives and faith of Abraham, Isaac, and Jacob, and their significance in God's plan."
-    },
-    {
-        "goal": "Students will be able to explain the significance of the Exodus and the Ten Commandments.",
-        "week": "4",
-        "topic": "Moses and the Exodus",
-        "topicSummary": "The story of Moses, the Exodus from Egypt, and the giving of the Ten Commandments."
-    },
-    {
-        "goal": "Students will be able to identify key prophets and summarize their main messages.",
-        "week": "5",
-        "topic": "The Prophets (Elijah, Elisha, Isaiah)",
-        "topicSummary": "The lives and messages of selected prophets and their roles in conveying God's word."
-    },
-    {
-        "goal": "Students will be able to recount key events in Jesus' life and explain the significance of his miracles.",
-        "week": "6",
-        "topic": "The Life of Jesus: Birth, Ministry, and Miracles",
-        "topicSummary": "The birth of Jesus, his ministry, teachings, and miracles."
-    },
-    {
-        "goal": "Students will be able to explain the significance of Jesus' death, resurrection, and ascension.",
-        "week": "7",
-        "topic": "The Life of Jesus: Death, Resurrection, and Ascension",
-        "topicSummary": "Jesus' crucifixion, death, resurrection, and ascension, and their significance for Christians."
+        "topic": "Review & Practice Essay Writing"
     }
 ]
 
 [
     {
-        "goal": "Accurately interpret map scales and identify distortions in various map projections.",
-        "week": "1",
-        "topic": "Map Projections and Scales",
-        "topicSummary": "Understanding different map projections (Mercator, conical, etc.) and their distortions, as well as calculating and interpreting map scales."
+        "goal": "Students will be able to count, write, and identify numbers 1-20.",
+        "week": 1,
+        "topic": "Numbers 1-20",
+        "topicShortNotes": [
+            "Counting objects",
+            "Number recognition",
+            "Writing numbers 1-20",
+            "Number order"
+        ]
     },
     {
-        "goal": "Differentiate between weather and climate and explain the factors influencing climate variations.",
-        "week": "2",
-        "topic": "Weather and Climate",
-        "topicSummary": "Exploring weather elements (temperature, precipitation, wind), climate types (Köppen classification), and their influence on human activities."
+        "goal": "Students will be able to add and subtract numbers within 10 accurately.",
+        "week": 2,
+        "topic": "Addition and Subtraction within 10",
+        "topicShortNotes": [
+            "Using objects to add and subtract",
+            "Addition facts to 10",
+            "Subtraction facts to 10",
+            "Number sentences"
+        ]
     },
     {
-        "goal": "Analyze the evidence for climate change and evaluate its potential impacts on different regions.",
-        "week": "3",
-        "topic": "Climate Change and its Impacts",
-        "topicSummary": "Investigating the causes and consequences of climate change, including global warming, sea-level rise, and extreme weather events."
+        "goal": "Students will be able to identify and describe basic shapes and patterns.",
+        "week": 3,
+        "topic": "Shapes and Patterns",
+        "topicShortNotes": [
+            "Identifying basic shapes (circle, square, triangle, rectangle)",
+            "Creating patterns using shapes and colors",
+            "Describing patterns",
+            "Sorting shapes"
+        ]
     },
     {
-        "goal": "Interpret population pyramids and analyze factors influencing population distribution and change.",
-        "week": "4",
-        "topic": "Population Geography",
-        "topicSummary": "Studying population distribution, density, growth rates, and migration patterns, including demographic transition models."
+        "goal": "Students will be able to count, write, and identify numbers 1-100.",
+        "week": 4,
+        "topic": "Numbers 21-100",
+        "topicShortNotes": [
+            "Counting by tens",
+            "Counting by fives",
+            "Number recognition to 100",
+            "Writing numbers to 100"
+        ]
     },
     {
-        "goal": "Explain the factors influencing settlement patterns and the challenges of urbanization.",
-        "week": "5",
-        "topic": "Settlement Geography",
-        "topicSummary": "Examining the patterns and types of settlements (rural, urban), their functions, and the processes of urbanization."
+        "goal": "Students will be able to add and subtract numbers within 20 accurately.",
+        "week": 5,
+        "topic": "Addition and Subtraction within 20",
+        "topicShortNotes": [
+            "Using ten frames",
+            "Adding and subtracting with regrouping",
+            "Addition facts to 20",
+            "Subtraction facts to 20"
+        ]
     },
     {
-        "goal": "Analyze the spatial distribution of economic activities and their impact on the environment.",
-        "week": "6",
-        "topic": "Economic Geography",
-        "topicSummary": "Exploring different economic activities (primary, secondary, tertiary), their distribution, and their relationship to geographical factors."
+        "goal": "Students will be able to measure length and interpret simple data.",
+        "week": 6,
+        "topic": "Measurement and Data",
+        "topicShortNotes": [
+            "Measuring length using non-standard units",
+            "Comparing lengths",
+            "Collecting and representing data using graphs",
+            "Interpreting data"
+        ]
     },
     {
-        "goal": "Evaluate different approaches to resource management and propose solutions to environmental problems.",
-        "week": "7",
-        "topic": "Resource Management and Environmental Issues",
-        "topicSummary": "Investigating the sustainable management of natural resources (water, minerals, forests) and addressing environmental problems like pollution and deforestation."
+        "goal": "Students will demonstrate mastery of all key concepts covered in the curriculum.",
+        "week": 7,
+        "topic": "Review and Assessment",
+        "topicShortNotes": [
+            "Review of all concepts covered",
+            "Practice problems",
+            "Assessment activities",
+            "Identifying areas for improvement"
+        ]
     }
 ]
-
-[
-    {
-        "goal": "Understand different types of maps and be able to interpret basic map information.",
-        "week": "1",
-        "topicShortNotes": "Map Skills: Introduction to maps, map scales, cardinal and ordinal directions, map symbols, basic map interpretation."
-    },
-    {
-        "goal": "Differentiate between weather and climate and interpret climate graphs.",
-        "week": "2",
-        "topicShortNotes": "Weather and Climate: Elements of weather (temperature, rainfall, wind, sunshine), weather instruments, climate graphs, factors affecting climate."
-    },
-    {
-        "goal": "Identify and describe the characteristics of different climate zones.",
-        "week": "3",
-        "topicShortNotes": "Climate Zones:  Major world climate zones (tropical, temperate, polar), characteristics of each zone, distribution on a world map."
-    },
-    {
-        "goal": "Explain factors influencing population distribution and interpret population pyramids.",
-        "week": "4",
-        "topicShortNotes": "Population Distribution: Factors affecting population distribution (climate, resources, relief), population density, population pyramids."
-    },
-    {
-        "goal": "Identify and describe different landforms and their processes of formation.",
-        "week": "5",
-        "topicShortNotes": "Landforms:  Introduction to different landforms (mountains, hills, plateaus, plains, valleys, rivers, etc.), processes of formation."
-    },
-    {
-        "goal": "Understand river systems and the processes of erosion and deposition.",
-        "week": "6",
-        "topicShortNotes": "Rivers and Drainage: River systems, river features (source, mouth, tributaries), drainage basins, erosion and deposition by rivers."
-    },
-    {
-        "goal": "Consolidate learning and prepare for assessments.",
-        "week": "7",
-        "topicShortNotes": "Revision and Practice: Review all topics covered, practice map work, answer past papers and sample questions."
-    }
-]
-

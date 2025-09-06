@@ -88,12 +88,15 @@ function displayStudyPlan(plan) {
             <p><strong>📖 Summary:</strong> ${plan.summary}</p>
 
             <h3>📅 7-Week Roadmap</h3>
-            <ul style="list-style:none; padding:0;">
+            <ul class='roadmap'>
                 ${plan.roadmap.map(w => `
-                    <li style="padding:8px 0; border-bottom:1px solid #eee;">
+                    <li>
                         <strong>Week ${w.week}:</strong> 
-                        <span>${w.topic}</span> → 
+                        <hr>
+                        <strong>${w.topic}</strong> → 
                         <em>${w.goal}</em>
+                        <strong>Short Note</strong>
+                        <em>${w.topicShortNotes||"Not Available kinly regerate"}</em>
                     </li>
                 `).join('')}
             </ul>

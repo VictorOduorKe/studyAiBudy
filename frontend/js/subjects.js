@@ -39,6 +39,7 @@ async function loadSubjects() {
 
     // Update welcome message
     document.querySelector(".welcomeUser")?.textContent = `Welcome, ${username}!`;
+    document.querySelector(".username")?.textContent =username;
 
     // Render subjects
     subjectsList.innerHTML = "";

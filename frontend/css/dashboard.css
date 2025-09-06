@@ -189,3 +189,68 @@ button.delete {
   }
 
  }
+
+ .roadmap{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  list-style: none;
+  padding: 10px;
+}
+.roadmap li{
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+ }
+ .roadmap li hr{
+  width: 100%;
+  height: 1px;
+  color: black;
+ }
+ .profile{
+  background:gray;
+  width:40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-right: 20px;
+ }
+ .profile i{
+  font-size: 30px;
+  color:#a7a7a7
+ }
+ .profile .username{
+  position: absolute;
+  bottom:-20px;
+  display: none;
+ }
+ .profile:hover> .username{
+  display: block;
+ }
+ .profile::after{
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: 1000;
+  top:0;
+  right: 0;
+  background: green;
+  border-radius: 50%;
+  animation: animateUser 2s infinite;
+ }
+ @keyframes animateUser {
+  0%{
+    transform: scale(1.3);
+  }
+  50%{
+    transform: scale(0.5);
+  }
+  100%{
+    transform: scale(1.3);
+  }
+ }
