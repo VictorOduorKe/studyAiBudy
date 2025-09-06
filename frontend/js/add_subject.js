@@ -145,7 +145,7 @@ window.deleteSubject = async function(id) {
     if (!confirm("Are you sure you want to delete this subject? This will also delete its study plan.")) return;
 
     try {
-        const res = await fetch(`hhttps://studyaibudy.onrender.com/api/subjects/${id}`, {
+        const res = await fetch(`https://studyaibudy.onrender.com/api/subjects/${id}`, {
             method: "DELETE",
             credentials: "include"
         });
