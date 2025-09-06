@@ -92,7 +92,7 @@ function displayStudyPlan(plan) {
                 ${plan.roadmap.map(w => `
                     <li style="padding:8px 0; border-bottom:1px solid #eee;">
                         <strong>Week ${w.week}:</strong> 
-                        <span>${w.topicShortNotes}</span> → 
+                        <span>${w.topic}</span> → 
                         <em>${w.goal}</em>
                     </li>
                 `).join('')}

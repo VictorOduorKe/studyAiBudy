@@ -1,109 +1,131 @@
+# study_bp.py
+from flask import Blueprint, request, jsonify, session
+from db import execute_query
 import os
+import requests
 import json
 import re
-import google.generativeai as genai
-from flask import Blueprint, request, jsonify,session
-from db import execute_query
 
-plan_bp = Blueprint("plan", __name__)
+study_bp = Blueprint("study", __name__)
 
-# Configure Gemini
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-model = genai.GenerativeModel("gemini-1.5-flash")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_API_URL = f"{os.getenv('GEMINI_API_URL')}:generateContent?key={GEMINI_API_KEY}"
 
-
-def clean_json_output(raw_text: str) -> str:
-    """Clean Gemini output to try to extract valid JSON."""
-    # Remove code fences like ```json ... ```
-    cleaned = re.sub(r"```.*?```", "", raw_text, flags=re.S)
-
-    # Keep only content between first { and last }
-    if "{" in cleaned and "}" in cleaned:
-        cleaned = cleaned[cleaned.find("{"): cleaned.rfind("}") + 1]
-
-    # Remove trailing commas before ] or }
-    cleaned = re.sub(r",(\s*[\]}])", r"\1", cleaned)
-
-    return cleaned.strip()
+def get_username(user_id):
+    result = execute_query("SELECT name FROM users WHERE id = %s", params=(user_id,), fetchone=True)
+    return result["name"] if result else None
 
 
-def try_parse_json(raw_text: str):
-    """Try cleaning & parsing JSON safely."""
+# -----------------------------
+# Generate Study Plan
+# -----------------------------
+@study_bp.route("/api/generate_plan", methods=["POST"])
+def generate_plan():
+    if "user_id" not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    user_id = session["user_id"]
+    data = request.get_json()
+    subject = data.get("subject")
+    level = data.get("level")
+
+    if not subject or not level:
+        return jsonify({"error": "Subject and level are required"}), 400
+
     try:
-        return json.loads(clean_json_output(raw_text))
-    except Exception:
-        return None
+        # Get subject_id
+        subject_row = execute_query(
+            "SELECT id FROM subjects WHERE subject_name=%s AND education_level=%s AND user_id=%s",
+            params=(subject, level, user_id),
+            fetchone=True,
+        )
+        if not subject_row:
+            return jsonify({"error": "Subject not found for this user"}), 404
 
+        subject_id = subject_row["id"]
 
-def generate_plan(subject, level, user_id, subject_id):
-    prompt = f"""
-Create a comprehensive study plan for '{subject}' at '{level}' level.
-Include:
+        # Check if plan exists
+        existing_plan = execute_query(
+            "SELECT id, summary, roadmap, quiz_questions FROM study_plans WHERE subject_id=%s",
+            params=(subject_id,), fetchone=True
+        )
+        if existing_plan:
+            return jsonify({
+                "id": existing_plan["id"],
+                "subject": subject,
+                "level": level,
+                "summary": existing_plan["summary"],
+                "roadmap": json.loads(existing_plan["roadmap"]),
+                "quiz_questions": json.loads(existing_plan["quiz_questions"])
+            })
 
-1. A concise but clear summary (3–5 sentences).
-2. A 7-week roadmap where each week has:
-   - "week": the week number
-   - "topicShortNotes": 3–5 short bullet points
-   - "goal": a measurable learning outcome
-3. 10 multiple-choice questions with 4 options (A, B, C, D) and the correct answer.
+        # 🔥 Use original full prompt from first script
+        prompt = f"""
+        Create a comprehensive study plan for '{subject}' at '{level}' level.
+        Include:
+        1. A short summary.
+        2. A 7-week roadmap: week, topic, goal.
+        3. 10 multiple-choice questions with 4 options and correct answer.
 
-Return ONLY a valid JSON object. No markdown, no explanation.
-"""
+        Return only a valid JSON object:
+        {{
+          "summary": "...",
+          "roadmap": [{{"week": "1", "topic": "...", "goal": "..."}}],
+          "quiz_questions": [{{"question": "...", "options": ["A","B","C","D"], "answer": "A"}}]
+        }}
+        Only raw JSON. No markdown.
+        """
 
-    # First attempt
-    response = model.generate_content(prompt)
-    parsed = try_parse_json(response.text)
-
-    # Retry if parsing failed
-    if not parsed:
-        retry_prompt = prompt + "\nIMPORTANT: Output ONLY raw valid JSON, no text or explanation."
-        retry_response = model.generate_content(retry_prompt)
-        parsed = try_parse_json(retry_response.text)
-
-    if not parsed:
-        # Final fallback: return raw output for debugging
-        return {
-            "error": "Invalid JSON from Gemini",
-            "raw_output": response.text[:500]  # truncate long junk
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "temperature": 0.7,
+                "topP": 0.9,
+                "maxOutputTokens": 1200
+            },
+            "safetySettings": [
+                {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_ONLY_HIGH"},
+                {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_ONLY_HIGH"},
+                {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_ONLY_HIGH"},
+                {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_ONLY_HIGH"}
+            ]
         }
 
-    summary = parsed.get("summary", "")
-    roadmap = parsed.get("roadmap", [])
-    quiz_questions = parsed.get("quiz_questions", [])
+        headers = {"Content-Type": "application/json"}
+        response = requests.post(GEMINI_API_URL, json=payload, headers=headers, timeout=20)
+        if response.status_code != 200:
+            return jsonify({"error": "Gemini API failed", "details": response.text}), 502
 
-    # Save to DB
-    try:
+        raw_text = response.json().get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text","")
+        cleaned_text = re.sub(r"^```(?:json)?\s*|```$", "", raw_text.strip())
+        plan_data = json.loads(cleaned_text)
+
+        summary = plan_data.get("summary","")
+        roadmap = plan_data.get("roadmap",[])
+        quiz_questions = plan_data.get("quiz_questions",[])
+
+        # Save to DB
         execute_query(
-            """
-            INSERT INTO study_plans (subject_id, user_id, summary, roadmap, quiz_questions)
-            VALUES (%s, %s, %s, %s, %s)
-            """,
-            params=(subject_id, user_id, summary, json.dumps(roadmap), json.dumps(quiz_questions)),
-            commit=True,
+            "INSERT INTO study_plans (subject_id,user_id,summary,roadmap,quiz_questions) VALUES (%s,%s,%s,%s,%s)",
+            params=(subject_id,user_id,summary,json.dumps(roadmap),json.dumps(quiz_questions)),
+            commit=True
         )
-    except Exception as e:
-        return {"error": f"Database insert failed: {str(e)}"}
+        new_plan_id = execute_query("SELECT LAST_INSERT_ID() as id", fetchone=True)["id"]
 
-    return {"summary": summary, "roadmap": roadmap, "quiz_questions": quiz_questions}
-
-
-@plan_bp.route("/api/generate_plan", methods=["POST"])
-def create_plan():
-    try:
-        data = request.json
-        subject = data.get("subject")
-        level = data.get("level")
-        user_id = data.get("user_id")
-        subject_id = data.get("subject_id")
-
-        if not all([subject, level, user_id, subject_id]):
-            return jsonify({"error": "Missing required fields"}), 400
-
-        result = generate_plan(subject, level, user_id, subject_id)
-        return jsonify(result), 200
+        return jsonify({
+            "id": new_plan_id,
+            "subject": subject,
+            "level": level,
+            "summary": summary,
+            "roadmap": roadmap,
+            "quiz_questions": quiz_questions
+        })
 
     except Exception as e:
-        return jsonify({"error": f"Server error: {str(e)}"}), 500
+        print(f"Error generating plan: {e}")
+        return jsonify({"error":"Server error","details":str(e)}), 500
+
+
 
 # -----------------------------
 # Get Saved Plan by ID
@@ -122,23 +144,21 @@ def get_saved_plan(plan_id):
         JOIN subjects s ON sp.subject_id = s.id
         WHERE sp.id=%s AND s.user_id=%s
         """
-        plan_data = execute_query(query, params=(plan_id, user_id), fetchone=True)
+        plan_data = execute_query(query, params=(plan_id,user_id), fetchone=True)
         if not plan_data:
             return jsonify({"error": "Plan not found or access denied"}), 404
 
-        return jsonify(
-            {
-                "id": plan_data["id"],
-                "subject": plan_data["subject_name"],
-                "level": plan_data["education_level"],
-                "summary": plan_data["summary"],
-                "roadmap": json.loads(plan_data["roadmap"]),
-                "quiz_questions": json.loads(plan_data["quiz_questions"]),
-            }
-        )
+        return jsonify({
+            "id": plan_data["id"],
+            "subject": plan_data["subject_name"],
+            "level": plan_data["education_level"],
+            "summary": plan_data["summary"],
+            "roadmap": json.loads(plan_data["roadmap"]),
+            "quiz_questions": json.loads(plan_data["quiz_questions"])
+        })
     except Exception as e:
         print(f"Error fetching plan: {e}")
-        return jsonify({"error": "Server error", "details": str(e)}), 500
+        return jsonify({"error":"Server error","details":str(e)}), 500
 
 
 # -----------------------------
@@ -154,12 +174,12 @@ def get_quiz_result(plan_id):
         result = execute_query(
             "SELECT id FROM quiz_attempts WHERE user_id=%s AND plan_id=%s",
             params=(user_id, plan_id),
-            fetchone=True,
+            fetchone=True
         )
         return jsonify({"attempted": bool(result)})
     except Exception as e:
         print(f"Error checking quiz result: {e}")
-        return jsonify({"error": "Server error", "details": str(e)}), 500
+        return jsonify({"error":"Server error","details":str(e)}), 500
 
 
 # -----------------------------
@@ -178,19 +198,16 @@ def submit_quiz():
     total = data.get("total_questions") or data.get("total")
 
     if not all([plan_id, answers is not None, score is not None, total]):
-        return jsonify({"error": "Missing required fields"}), 400
+        return jsonify({"error":"Missing required fields"}), 400
 
     try:
         existing = execute_query(
             "SELECT id FROM quiz_attempts WHERE user_id=%s AND plan_id=%s",
             params=(user_id, plan_id),
-            fetchone=True,
+            fetchone=True
         )
         if existing:
-            return (
-                jsonify({"error": "Quiz already submitted", "status": "duplicate"}),
-                409,
-            )
+            return jsonify({"error":"Quiz already submitted","status":"duplicate"}), 409
 
         execute_query(
             """
@@ -198,12 +215,10 @@ def submit_quiz():
             VALUES (%s,%s,%s,%s,%s)
             """,
             params=(user_id, plan_id, json.dumps(answers), score, total),
-            commit=True,
+            commit=True
         )
 
-        return jsonify(
-            {"message": "Quiz submitted successfully", "score": score, "total": total}
-        )
+        return jsonify({"message":"Quiz submitted successfully","score":score,"total":total})
     except Exception as e:
         print(f"Error submitting quiz: {e}")
-        return jsonify({"error": "Failed to save quiz results", "details": str(e)}), 500
+        return jsonify({"error":"Failed to save quiz results","details":str(e)}), 500
