@@ -65,37 +65,38 @@ def generate_plan():
                 }
             )
 
-        # 🔥 Use original full prompt from first script
+        # 🔥 Prompt for Gemini
         prompt = f"""
-        Create a comprehensive study plan for '{subject}' at '{level}' level.
-        Include:
+Create a comprehensive study plan for '{subject}' at '{level}' level.
+Include:
 
-        1. A concise but clear summary (3–5 sentences).
-        2. A 7-week roadmap where each week has:
-        - "week": the week number
-        - "topicShortNotes": 3–5 short bullet points (not just one line) that explain the key ideas
-        - "goal": a measurable learning outcome
-        3. 10 multiple-choice questions with 4 options (A, B, C, D) and the correct answer.
+1. A concise but clear summary (3–5 sentences).
+2. A 7-week roadmap where each week has:
+   - "week": the week number
+   - "topicShortNotes": 3–5 short bullet points (not just one line) that explain the key ideas
+   - "goal": a measurable learning outcome
+3. 10 multiple-choice questions with 4 options (A, B, C, D) and the correct answer.
 
-        Return only a valid JSON object in this format:
-        {{
-           "summary": "...",
-            "roadmap": [
-                {{
-            "week": "1",
-              "topicShortNotes": ["point1", "point2", "point3"],
-              "goal": "..."
-              }}],
-            "quiz_questions": [
-                {{
-              "question": "...",
-              "options": ["A","B","C","D"],
-              "answer": "A"
-               }}
-               ]
-         }}
-          Only raw JSON. No markdown.
-          """
+Return only a valid JSON object in this format:
+{{
+  "summary": "...",
+  "roadmap": [
+    {{
+      "week": "1",
+      "topicShortNotes": ["point1", "point2", "point3"],
+      "goal": "..."
+    }}
+  ],
+  "quiz_questions": [
+    {{
+      "question": "...",
+      "options": ["A","B","C","D"],
+      "answer": "A"
+    }}
+  ]
+}}
+Only raw JSON. No markdown.
+"""
 
         payload = {
             "contents": [{"parts": [{"text": prompt}]}],
@@ -142,7 +143,13 @@ def generate_plan():
             .get("text", "")
         )
         cleaned_text = re.sub(r"^```(?:json)?\s*|```$", "", raw_text.strip())
-        plan_data = json.loads(cleaned_text)
+
+        # ✅ Safe JSON parsing with error handling
+        try:
+            plan_data = json.loads(cleaned_text)
+        except json.JSONDecodeError as e:
+            print(f"[DEBUG] Gemini invalid JSON: {cleaned_text}")
+            return jsonify({"error": "Invalid JSON from Gemini", "details": str(e)}), 502
 
         summary = plan_data.get("summary", "")
         roadmap = plan_data.get("roadmap", [])
