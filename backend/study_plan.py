@@ -198,7 +198,7 @@ def submit_quiz():
     total = data.get("total_questions") or data.get("total")
 
     if not all([plan_id, answers is not None, score is not None, total]):
-        return jsonify({"error":"Missing required fields"}), 400
+        return jsonify({"error":"Missing the required fields"}), 400
 
     try:
         existing = execute_query(
