@@ -64,13 +64,13 @@ def generate_plan():
         Create a comprehensive study plan for '{subject}' at '{level}' level.
         Include:
         1. A short summary.
-        2. A 7-week roadmap: week, topic,topicSummary, goal.
+        2. A 7-week roadmap: week, topicShortNotes, goal.
         3. 10 multiple-choice questions with 4 options and correct answer.
 
         Return only a valid JSON object:
         {{
           "summary": "...",
-          "roadmap": [{{"week": "1", "topic": "...","topicSummary":"...", "goal": "..."}}],
+          "roadmap": [{{"week": "1", "topicShotNotes": "...", "goal": "..."}}],
           "quiz_questions": [{{"question": "...", "options": ["A","B","C","D"], "answer": "A"}}]
         }}
         Only raw JSON. No markdown.

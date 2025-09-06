@@ -204,3 +204,85 @@
         "question": "What is the opposite of 'big'?"
     }
 ]
+
+[
+    {
+        "goal": "Understand the concept of rhythm, beat, and pulse. Identify different rhythmic patterns.",
+        "week": "1",
+        "topic": "Introduction to Music: Rhythm and Pulse"
+    },
+    {
+        "goal": "Understand the concept of melody and pitch. Learn to identify high and low notes. Sing simple melodies.",
+        "week": "2",
+        "topic": "Melody and Pitch"
+    },
+    {
+        "goal": "Learn to read and write basic musical notation. Identify treble and bass clef. Understand the position of notes on the staff.",
+        "week": "3",
+        "topic": "Musical Notation: Staff, Clef, and Notes"
+    },
+    {
+        "goal": "Understand different time signatures (e.g., 4/4, 3/4). Identify different rhythmic values (e.g., whole, half, quarter notes).",
+        "week": "4",
+        "topic": "Time Signatures and Rhythmic Values"
+    },
+    {
+        "goal": "Understand the concepts of dynamics (loudness and softness) and tempo (speed). Identify different dynamic markings (e.g., piano, forte) and tempo markings (e.g., allegro, adagio).",
+        "week": "5",
+        "topic": "Dynamics and Tempo"
+    },
+    {
+        "goal": "Understand basic harmony. Differentiate between consonance and dissonance. Sing simple two-part harmonies.",
+        "week": "6",
+        "topic": "Introduction to Harmony: Consonance and Dissonance"
+    },
+    {
+        "goal": "Identify different types of musical instruments (e.g., strings, woodwinds, brass, percussion). Learn about different musical genres (e.g., classical, pop, jazz).",
+        "week": "7",
+        "topic": "Musical Instruments and Genres"
+    }
+]
+[
+    {
+        "goal": "Students will be able to identify the main sections of the Bible and explain the importance of studying it.",
+        "week": "1",
+        "topic": "Introduction to CRE and the Bible",
+        "topicSummary": "Understanding what CRE is, the different parts of the Bible (Old and New Testaments), and its importance."
+    },
+    {
+        "goal": "Students will be able to recount the creation story and explain the concept of sin.",
+        "week": "2",
+        "topic": "Creation and the Fall",
+        "topicSummary": "The story of creation as told in Genesis, the nature of God, and the consequences of Adam and Eve's disobedience."
+    },
+    {
+        "goal": "Students will be able to describe the key events in the lives of the patriarchs and their relationship with God.",
+        "week": "3",
+        "topic": "The Patriarchs (Abraham, Isaac, Jacob)",
+        "topicSummary": "The lives and faith of Abraham, Isaac, and Jacob, and their significance in God's plan."
+    },
+    {
+        "goal": "Students will be able to explain the significance of the Exodus and the Ten Commandments.",
+        "week": "4",
+        "topic": "Moses and the Exodus",
+        "topicSummary": "The story of Moses, the Exodus from Egypt, and the giving of the Ten Commandments."
+    },
+    {
+        "goal": "Students will be able to identify key prophets and summarize their main messages.",
+        "week": "5",
+        "topic": "The Prophets (Elijah, Elisha, Isaiah)",
+        "topicSummary": "The lives and messages of selected prophets and their roles in conveying God's word."
+    },
+    {
+        "goal": "Students will be able to recount key events in Jesus' life and explain the significance of his miracles.",
+        "week": "6",
+        "topic": "The Life of Jesus: Birth, Ministry, and Miracles",
+        "topicSummary": "The birth of Jesus, his ministry, teachings, and miracles."
+    },
+    {
+        "goal": "Students will be able to explain the significance of Jesus' death, resurrection, and ascension.",
+        "week": "7",
+        "topic": "The Life of Jesus: Death, Resurrection, and Ascension",
+        "topicSummary": "Jesus' crucifixion, death, resurrection, and ascension, and their significance for Christians."
+    }
+]
