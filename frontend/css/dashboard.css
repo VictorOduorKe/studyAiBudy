@@ -290,3 +290,21 @@ button.delete {
   padding: 10px;
   font-size: 30px;
  }
+ .subjectForm{
+  display: flex;
+  gap:10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+ }
+ .subject input{
+  padding: 10px;
+ }
+ .subjectForm button{
+  background: #2d3436;
+  color: #ddd;
+  font-size: 20px;
+  transition: all 0.4s ease-in-out;
+}
+.subjectForm button:hover{
+  background: #181717;
+  transition: all 0.4s ease-in-out;
+ }
