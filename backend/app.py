@@ -24,7 +24,7 @@ app.config["SESSION_COOKIE_SAMESITE"] = "None"    # Important for cross-site
 
 # ✅ STEP 1: Initialize CORS FIRST — before any blueprints
 CORS(app,
-     origins=["https://studyaibudy.netlify.app"],  # 👈 Your frontend
+     origins=["https://studyaibudy.netlify.app","http://127.0.0.1:5500"],  # 👈 Your frontend
      methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
      allow_headers=["Content-Type"],
      supports_credentials=True,
