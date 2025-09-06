@@ -2,7 +2,7 @@ import os
 import json
 import re
 import google.generativeai as genai
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify,session
 from db import execute_query
 
 plan_bp = Blueprint("plan", __name__)
@@ -104,3 +104,106 @@ def create_plan():
 
     except Exception as e:
         return jsonify({"error": f"Server error: {str(e)}"}), 500
+
+# -----------------------------
+# Get Saved Plan by ID
+# -----------------------------
+@study_bp.route("/api/plan/<int:plan_id>", methods=["GET"])
+def get_saved_plan(plan_id):
+    if "user_id" not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    user_id = session["user_id"]
+    try:
+        query = """
+        SELECT sp.id, sp.summary, sp.roadmap, sp.quiz_questions,
+               s.subject_name, s.education_level
+        FROM study_plans sp
+        JOIN subjects s ON sp.subject_id = s.id
+        WHERE sp.id=%s AND s.user_id=%s
+        """
+        plan_data = execute_query(query, params=(plan_id, user_id), fetchone=True)
+        if not plan_data:
+            return jsonify({"error": "Plan not found or access denied"}), 404
+
+        return jsonify(
+            {
+                "id": plan_data["id"],
+                "subject": plan_data["subject_name"],
+                "level": plan_data["education_level"],
+                "summary": plan_data["summary"],
+                "roadmap": json.loads(plan_data["roadmap"]),
+                "quiz_questions": json.loads(plan_data["quiz_questions"]),
+            }
+        )
+    except Exception as e:
+        print(f"Error fetching plan: {e}")
+        return jsonify({"error": "Server error", "details": str(e)}), 500
+
+
+# -----------------------------
+# Get Quiz Result
+# -----------------------------
+@study_bp.route("/api/quiz/result/<int:plan_id>", methods=["GET"])
+def get_quiz_result(plan_id):
+    if "user_id" not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    user_id = session["user_id"]
+    try:
+        result = execute_query(
+            "SELECT id FROM quiz_attempts WHERE user_id=%s AND plan_id=%s",
+            params=(user_id, plan_id),
+            fetchone=True,
+        )
+        return jsonify({"attempted": bool(result)})
+    except Exception as e:
+        print(f"Error checking quiz result: {e}")
+        return jsonify({"error": "Server error", "details": str(e)}), 500
+
+
+# -----------------------------
+# Submit Quiz
+# -----------------------------
+@study_bp.route("/api/quiz/submit", methods=["POST"])
+def submit_quiz():
+    if "user_id" not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+
+    user_id = session["user_id"]
+    data = request.get_json()
+    plan_id = data.get("plan_id")
+    answers = data.get("answers")
+    score = data.get("score")
+    total = data.get("total_questions") or data.get("total")
+
+    if not all([plan_id, answers is not None, score is not None, total]):
+        return jsonify({"error": "Missing required fields"}), 400
+
+    try:
+        existing = execute_query(
+            "SELECT id FROM quiz_attempts WHERE user_id=%s AND plan_id=%s",
+            params=(user_id, plan_id),
+            fetchone=True,
+        )
+        if existing:
+            return (
+                jsonify({"error": "Quiz already submitted", "status": "duplicate"}),
+                409,
+            )
+
+        execute_query(
+            """
+            INSERT INTO quiz_attempts (user_id, plan_id, answers, score, total_questions)
+            VALUES (%s,%s,%s,%s,%s)
+            """,
+            params=(user_id, plan_id, json.dumps(answers), score, total),
+            commit=True,
+        )
+
+        return jsonify(
+            {"message": "Quiz submitted successfully", "score": score, "total": total}
+        )
+    except Exception as e:
+        print(f"Error submitting quiz: {e}")
+        return jsonify({"error": "Failed to save quiz results", "details": str(e)}), 500
