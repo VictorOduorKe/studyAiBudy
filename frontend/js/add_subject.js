@@ -37,7 +37,7 @@ addForm.addEventListener("submit", async (e) => {
     }
 
     try {
-        const res = await fetch("hhttps://studyaibudy.onrender.com/api/subjects", {
+        const res = await fetch("https://studyaibudy.onrender.com/api/subjects", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -82,7 +82,7 @@ function showMessage(text, color) {
 // ✅ Load subjects
 async function loadSubjects() {
     try {
-        const res = await fetch("hhttps://studyaibudy.onrender.com/subjects", {
+        const res = await fetch("https://studyaibudy.onrender.com/subjects", {
             method: "GET",
             credentials: "include"
         });
