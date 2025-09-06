@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, session
 from db import get_connection
 from flask_bcrypt import Bcrypt
+from datetime import datetime
 
 login_bp = Blueprint("login", __name__)
 bcrypt = Bcrypt()  # ✅ Create instance here
@@ -51,10 +52,27 @@ def login():
 @login_bp.route("/api/user", methods=["GET"])
 def get_current_user():
     if "user_id" not in session:
-        return jsonify({"error": "Unauthorized", "redirectUrl":"../index.html"}), 401
+        return jsonify({"error": "Unauthorized", "redirectUrl": "../index.html"}), 401
+
+    user_id = session["user_id"]
+    current_timestamp = datetime.now()
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    try:
+        # Update last_login for the current user
+        cursor.execute(
+            "UPDATE users SET last_login = %s WHERE id = %s",
+            (current_timestamp, user_id)
+        )
+        conn.commit()
+    finally:
+        cursor.close()
+        conn.close()
 
     return jsonify({
-        "id": session["user_id"],
+        "id": user_id,
         "username": session["username"]
     }), 200
 
